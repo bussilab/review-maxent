@@ -31,9 +31,9 @@ int main(){
     double x=3;
     std::ofstream of("out");
     for(unsigned i=0;i<nsteps;i++){
-      auto f=force(x)+lambda*T;
+      auto f=force(x)-lambda*T;
       x+=D/T*f*dt+std::sqrt(2*D*dt)*distribution(generator);
-      lambda+= kappa*dt/(1+i*dt/tau) * (xref-x);
+      lambda+= kappa*dt/(1+i*dt/tau) * (x-xref);
       if(i%stride==0) of<<i*dt<<" "<<x<<" "<<lambda<<"\n";
     }
   }
